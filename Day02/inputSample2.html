@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="register2.jsp">
+	<input type="date">
+	<input type="time">
+	<!-- 지원안됌 -->
+	<input type="datetime">
+	<input type="datetime-local">
+	<input type="month">
+	<input type= "week"><br>
+	<!-- email 형식인지 자동으로 체크한다. -->
+	<input type="email" name="email" placeholder="zzilra@daum.com"><br>
+	<input type="tel" name="telephone" pattern="[01]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-8447-7807"><br>
+	<!-- url 형식인지 자동으로 체크한다. -->
+	<input type="url" name="url" placeholder="https://daum.net">
+	<br>
+	<!-- 입력 양식 숫자... 서버에서 읽으면 문자 -->
+	<input type="number" name="age"><br>
+	<input type="range" list="steplist" min="0" max="100" name="score"><br>
+	<datalist id="steplist">
+		<option>0</option>
+		<option>25</option>
+		<option>50</option>
+		<option>75</option>
+		<option>100</option>
+	</datalist>
+	
+	<input type="color"><br>
+	<input type="search" autofocus="autofocus"><br>
+	<br>
+	
+	<details>
+		<summary>사용자정보 상세보기</summary>
+		<ul>
+			<li>aa1</li>
+			<li>aa2</li>
+			<li>aa3</li>
+			<li>aa4</li>
+			<li>aa5</li>
+		</ul>
+	</details>
+	<input type="submit" value="서버전송">
+</form>
+</body>
+</html>

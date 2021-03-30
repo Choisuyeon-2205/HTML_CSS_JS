@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<meta charset=utf-8>
+<title>KOSTA Academy</title>
+<style>
+  body {font-family:Verdana,sans-serif;font-size:0.8em;}
+  header,footer,main
+  {border:1px solid grey;
+  margin:5px;margin-bottom:15px;padding:8px;background-color:white;}
+  header,footer {color:white;background-color:#444;margin-bottom:5px;}
+  main {background-color:#ddd;}
+  nav ul {margin:0;padding:0;}
+  nav ul li {display:inline; margin:5px;}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>~KOSTA Academy~</h1>
+</header>
+
+<main>
+<section>
+<h2>관리자 로그인</h2>
+  	<form action="" method="get" enctype="application/x-www-form-urlencoded">
+		<label for="manapass">비밀번호:</label>
+		<input type="text" id="manapass" name="manapass"><br><br>
+	</form>
+</section>
+
+<section>
+<h2>사용자 로그인</h2>
+  	<form action="loginChk.jsp" method="get" enctype="application/x-www-form-urlencoded">
+		<label for="userid">사용자 아이디:</label>
+		<input type="text" id="userid" name="userid" ><br><br>
+		<label for="userpass">비밀번호:</label>
+		<input type="text" id="upw" name="upw"><br><br>
+		
+		<input type="submit" value="로그인">
+		<input type="reset" value="초기화하기">
+		<input type="button" value="회원가입" onclick="alert('회원가입')">
+	</form>
+</section>
+</main>
+
+<footer>
+  <p>&amp;copy; 2021 KOSTA Academy. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
