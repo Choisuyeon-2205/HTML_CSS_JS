@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	//internal javascript ... head, body 모든 위치 가능하다.
+	alert("1");
+	console.log("1번째 실행");
+	document.getElementById("here").innerHTML= "<p>변경하기</p>";
+</script>
+
+<!--  외부, 내부 자바스크립트는 따로 태그를 사용해야한다. -->
+<script src="external.js"></script>
+<script>
+call();
+call2();
+</script>
+</head>
+<!--  inline(인라인) javascript -->
+<body onload="alert('load완료');">
+<script>
+	alert("2");
+	console.log("2번째 실행");
+</script>
+<h1 onclick="alert('click')";>JavaScript연습(ECMAScript표준이름--EC6기준)</h1>
+<div id="here">여기</div>
+<script>
+	alert("3");
+	console.log("3번째 실행");
+	document.getElementById("here").innerHTML= "<p>변경하기</p>";
+</script>
+</body>
+</html>

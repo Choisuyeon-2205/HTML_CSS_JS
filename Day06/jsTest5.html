@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+//document.write(a+"<br>"); //not defined -- error
+document.write(b+"<br>"); //undefined출력
+//document.write(c+"<br>"); // Cannot access 'c' before initialization -- error
+
+a=10
+var b=20;
+let c=30;
+
+document.write(a+"<br>");
+document.write(b+"<br>");
+document.write(c+"<br>");
+</script>
+
+<script>
+document.write("a는 undefined"+"<br>");
+var a= "자바스크립트";
+document.write("a="+a+"<br>");
+
+f1();
+f2();
+
+//function 타입도 var처럼 호이스팅되서 실행시 먼저 메모리에 올라간다.
+function f1() {
+	document.write("함수1"+"<br>");
+}
+
+function f2() {
+	document.write("함수2"+"<br>");
+}
+</script>
+</body>
+</html>
