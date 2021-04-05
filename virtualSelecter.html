@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+ div, p { border: 1px solid gray; }
+ /* first-child: 자식 요소 중 첫번 째*/
+ p:first-child{
+ 	background-color: orange;
+ }
+ /* first-of-type: 자식 요소로 type 중 첫번 째*/
+  p:first-of-type{
+ 	background-color: hotpink;
+ }
+ h1:first-child { text-align: center; }
+ h2:first-child { text-align: center; }
+ 
+ li:nth-child(2n) { background-color: orange; }
+ /*li:nth-child(even) { background-color: orange; }*/
+ li:nth-child(2n+1) { background-color: hotpink; }
+  /*li:nth-child(odd) { background-color: hotpink; }*/
+  
+  li:nth-child(3n+1) { color: blue; }
+</style>
+</head>
+<body>
+
+<ul>
+	<li>HTML5</li>
+	<li>CSS3</li>
+	<li>JavaScript</li>
+	<li>JavaScript-jQuery</li>
+	<li>JavaScript-node.js</li>
+	
+</ul>
+
+
+<h1>가상선택자 연습(o)</h1>
+<h2>가상선택자 연습(x)</h2>
+<div>
+	<h2>가상선택자 연습(o)</h2>
+	<p>p1</p>
+	<p>p2</p>
+	<p>p3</p>
+	<p>p4</p>
+	<p>p5</p>
+</div>
+<div>
+	<h2>div 두번째</h2>
+	<p>p1</p>
+	<p>p2</p>
+	<p>p3</p>
+	<p>p4</p>
+	<p>p5</p>
+</div>
+</body>
+</html>
