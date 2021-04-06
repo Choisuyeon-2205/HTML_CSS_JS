@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+input:first-of-type {
+	background-color: skyblue;
+}
+
+input:nth-of-type(2) {
+	background-color: yellow;
+}
+
+input:nth-of-type(3) {
+	background-color: lightgreen;
+}
+
+input:nth-of-type(4) {
+	background-color: pink;
+}
+
+input:nth-of-type(5) {
+	background-color: red;
+}
+</style>
+<script>
+window.onload= function(){
+	document.querySelector("input:first-of-type").onclick= call;
+	document.querySelector("input:nth-of-type(2)").onclick= function(){
+		this.value="익명함수";
+	};
+	
+	document.querySelector("input:nth-of-type(3)").onclick= function(){
+		this.value="callback함수.. 매개변수에 함수를 넣는다.";
+	};
+	
+	document.querySelector("input:nth-of-type(4)").onclick= function(){
+		this.value="클로저...지역변수를 담는 함수를 return. 지역변수를 계속 사용한다.";
+	};
+	
+	document.querySelector("input:nth-of-type(5)").onclick= function(){
+		this.value="화살표함수는 람다표현식과 거의같다.";
+	};
+};
+
+function call(){
+	this.value= "명시적 함수";
+}
+</script>
+</head>
+<body>
+<h1>함수연습</h1>
+<hr>
+<input type="button" value="함수1">
+<input type="button" value="함수2">
+<input type="button" value="함수3">
+<input type="button" value="함수4">
+<input type="button" value="함수5">
+</body>
+</html>

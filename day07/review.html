@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	header h1{ background-color: orange; }
+	header h1:hover { background-color: pink; }
+	
+	#here { 
+	border: 1px solid green;
+	height: 300px;
+	margin: 10px; }
+</style>
+<script>
+//사용자 정의 함수: 1. 이름 있는 함수(선언적 함수)
+function call(){
+	alert("사용자함수 호출입니다.");
+	//BOM(Browser Objec Model)
+	location.href="../day06/lab2.html";
+}
+//아직 btn1이 올라오지 않음 => null 이라고 표시됌=> 아래에 써보자!
+//var obj= document.getElementById("btn1");
+//alert(obj);
+
+//2. 이름없는 함수(익명함수), 이벤트 핸들러(이벤트 발생 시 자동 실행)
+window.onload= function() {
+	//DOM(Document Object Model)
+	var obj= document.getElementById("btn1");
+	obj.onclick= call2;
+	btn2.onclick = call3;
+	btn3.onclick= f3;
+	btn4.onclick= f4;
+	btn5.onclick= f5;
+	btn6.onclick= f6;
+	btn7.onclick= f7;
+	btn8.onclick= f8;
+};
+
+function call2(){
+	var a= 10; b= "문자"; c=10>20; d={};
+	var e=function(){}; 
+	var f;
+	var s= `
+		<ol>
+			<li>${a}-->${typeof(a)}</li>
+			<li>${b}-->${typeof(b)}</li>
+			<li>${c}-->${typeof(c)}</li>
+			<li>${d}-->${typeof(d)}</li>
+			<li>${e}-->${typeof(e)}</li>
+			<li>${f}-->${typeof(fs)}</li>
+		</ol>`;
+	here.innerHTML=s;
+	alert(s);
+};
+
+function call3(){
+	var genders= document.getElementsByName("gender");
+	var chk, val="no check";
+	for(var i=0; i<genders.length; i++){
+		chk= genders[i].checked;
+		if(chk){
+			val= genders[i].value;
+		}
+	}
+	here.innerHTML=`${val}가 선택되었습니다.`;
+	
+	var season= document.getElementsByName("season");
+	for(var i=0; i<season.length; i++){
+		chk= season[i].checked;
+		if(chk){
+			val= season[i].value;
+		}
+	}
+	here.innerHTML+=`<br>${val}가 선택되었습니다.<br>`;
+};
+
+function f3(){
+	//배열... 값 여러개 묶음
+	var arr= [100, "자바스크립트",true,{},[1,2,3],call3,function(){a=10;alert(a);}];
+	arr.push(200); //추가 가능
+	var s="";
+	for(var i=0; i<arr.length; i++){
+		s+=`${arr[i]}---->${typeof(arr[i])}<br>`;
+		if(typeof(arr[i])==='function'){
+			arr[i]();
+		}
+	}
+	here.innerHTML += s;
+};
+
+function f4(){
+	var arr= [100, "자바스크립트",true,{},[1,2,3],call3,function(){a=10;alert(a);}];
+	here.innerHTML = arr;
+}
+
+function f5(){
+	//현재 시간
+	var currentTime= new Date().getTime();
+	//1초동안 looping
+	var value=0;
+	//1초가 지나면 loop를 빠져나감
+	while(new Date().getTime() < currentTime +1000){
+		value++;
+		console.log(value);
+	}
+	here.innerHTML="1초동안 돈 루프 수: "+value;
+}
+
+function f6(){
+	var num = 10;
+	var s=""; //지역 변수
+	
+	for(let i=0; i<num; i++){
+		for(let j=0; j<i+1; j++){
+			s+="*";
+		}
+		s+="<br>";
+	}
+	here.innerHTML = s;
+}
+
+function f7(){
+	//var은 함수 내에서 사용 가능한 지역 변수
+	//var이 없으면 전체에서 접근가능한 global
+	var num = 10;
+	var s="";
+	
+	for(i=0; i<num; i++){
+		for(var k=num; k>i+1; k--){
+			s+="&nbsp";
+		}
+		
+		for(let j=0; j<i+1; j++){
+			s+="*";
+		}
+		s+="<br>";
+	}
+	here.innerHTML = s;
+	here.innerHTML += "i= "+i+", j= "+j;
+}
+
+//전역변수
+var global=100;
+var s="global변수";
+s2="global변수2";
+
+function f8() {
+	//지역변수
+	//지역변수가 있으면 지역변수가 우선이다.
+	var s="지역변수"; 
+	const pi=3.14;
+	//pi=100; 상수는 수정할 수 없다.
+	here.innerHTML= "s="+s;
+	here.innerHTML += "<br>i="+i;
+	here.innerHTML += "<br>j="+j;	
+	here.innerHTML += "<br>k="+k;
+}
+
+</script>
+</head>
+<body>
+<div class="container">
+	<header>
+	<h1>JavaScript연습</h1>
+	<nav>
+		<ul>
+			<li><a href="../day06/lab2.html">연습1</a></li>
+			<li><a href="javascript:call();">연습2</a></li>
+			<li>연습3</li>
+		</ul>
+	</nav>
+	</header>
+	<main>
+		<section>
+			<button id="btn1">데이터타입(6가지)</button><br>
+			
+			<fieldset>
+				<legend>성별선택</legend>
+				<input type="radio" name="gender" value="Man">남자
+				<input type="radio" name="gender" checked="checked" value="Woman">여자
+			</fieldset>
+			<br><br>
+			
+			<!-- radio이름을 주어야 그중 하나만 선택할 수 있다. -->
+			<fieldset>
+				<legend>계절선택</legend>
+				<input type="radio" name="season" checked="checked" value="봄">봄
+				<input type="radio" name="season" value="여름">여름
+				<input type="radio" name="season" value="가을">가을
+				<input type="radio" name="season" value="겨울">겨울
+			</fieldset>
+			<br>
+			
+			<button id="btn2">조건문(if,switch)</button>
+			<button id="btn3">반복문(for,while)</button>
+			<button id="btn4">배열</button>
+			<button id="btn5">프로그램 시간측정</button>
+			<button id="btn6">중첩반복문(*)</button>
+			<button id="btn7">중첩반복문(*-2)</button>
+			<button id="btn8">global변수</button>
+		</section>
+		<section>
+		</section>
+		<article id="here">
+		</article>
+	</main>
+	<footer>
+	</footer>
+</div>
+</body>
+</html>

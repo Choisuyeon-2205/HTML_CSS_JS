@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+<h1>함수연습</h1>
+<hr>
+<input id="btn1" type="button" value="setInterval시작">
+<input id="btn2" type="button" value="setInterval중지">
+<script>
+console.dir(this);
+console.log("----this는 window---")
+
+var b6=document.querySelector("#btn1");
+b6.onclick= function(){
+	console.dir(this);
+	console.log("----this는 btn6---")
+	
+	intervalID= setInterval(function() {
+		console.dir(this);
+		//setInterval은 window함수
+		console.log("----setinterval의 tihs(window)--")
+		var r= Math.random()*256;
+		var g= Math.random()*256;
+		var b= Math.random()*256;
+		
+		b6.style.backgroundColor= `rgb(${r},${g},${b})`;
+	}, 1000);
+};
+
+btn2.onclick= function(){
+	clearInterval(intervalID);
+};
+</script>
+</body>
+</html>
