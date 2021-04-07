@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+var a=10;
+b=20;
+//alert(a+b);
+for(i=1;i<=5;i++){
+	console.log("i="+i);
+}
+for(var j=1;j<=5;j++){
+	console.log("j="+j);
+}
+
+alert(i+j);
+//함수 밖에서 선언한 변수는 무조건 global
+//선언안하고 사용한 변수는 무조건 global
+function call(){
+	//함수 내에서 var 선언한 변수는 local
+	for(j2=1;j2<=5;j2++){
+		console.log("j2="+j2);
+	}
+	for(var i2=1;i2<=5;i2++){
+		console.log("i2="+i2);
+	}
+	for(var i3=1;i3<=5;i3++){
+		console.log("i3="+i3);
+	}
+	for(let i4=1;i4<=5;i4++){
+		console.log("i4="+i4);
+	}
+	//console.log("i4="+i4); 오류
+	
+	return i3;
+}
+call();
+alert(j2);  //6출력
+//alert(i2);  //오류
+var result= call(); //i3를 전역변수로 만들기 싫으면 return 사용
+</script>
+</head>
+<body>
+<h2>Function학습</h2>
+</body>
+</html>
