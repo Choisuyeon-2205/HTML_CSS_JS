@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+//URI= URL(Location)+ URN(Name)
+window.onload= function(){
+		document.getElementById("btn1").onclick= function(){
+			here.innerHTML= this.innerText;
+			var url="https://search.naver.com/search.naver?where=nexearch&sm=top_sug.pre&fbm=0&acr=1&acq=%EC%A0%9C%EC%A4%91&qdt=0&ie=utf8&query=%EC%A0%9C%EC%A3%BC%EC%97%AC%ED%96%89";
+			var url2=encodeURIComponent(url);
+			here.innerHTML+= "<br>"+ url2;
+			
+			var url3=decodeURIComponent(url2);
+			here.innerHTML+= "<br>"+ url3;
+		};
+		document.querySelector("#btn2").onclick= function(){
+			here.innerHTML= this.innerText;
+			var s="a=10;b=20;c=a+b;alert(c);";
+			eval(s);
+		};
+		btn3.onclick= function(){
+			here.innerHTML= this.innerText;
+			var a= 10;
+			var b= "aa";
+			here.innerHTML+= "<br>"+isNaN(a/b)?"계산불가":"계산가능";
+			here.innerHTML+= "<br>"+(isNaN(NaN)==true);
+		};
+		document.querySelector("button:nth-of-type(4)").onclick= function(){
+			here.innerHTML= this.innerText;
+			var a= "100점";
+			//here.innerHTML+= "<br>"+(10+Number(a)); //a에 한글이 들어가 있어 계산 불가
+			here.innerHTML+= "<br>"+(10+parseInt(a)); //문자가 섞여도 숫자만 가져와준다.
+			var b= "200"; //+연산자는 문자인 경우 연결 연산자.. 문자+숫자= 문자
+			//다른 연산자(ex. -)는 자동형변환
+			here.innerHTML+= "<br>"+(10-b); 
+		};
+		document.querySelector("button:nth-of-type(5)").onclick= function(){
+			here.innerHTML= this.innerText;
+			
+			call(10,20,30);
+			call();
+			call(10);
+			call(100,200);
+		};
+		btn6.onclick= function(){
+			var arr= [10,20,30,40,50];
+			arr.forEach(function(item,i) {
+				here.innerHTML += "<br>"+i+"번째: "+item+" = "+ arguments[0];
+			})
+		};
+		btn7.onclick= function(){
+			call2(1,2); //인자의 갯수가 가변이라면?
+			var arr=[1,2];
+			call2(arr); //한 덩어리를 줌 => 두번째 undefined
+			call2(...arr); //숫자 두개로 인식...펼쳐져서 전달
+			//마지막 파라미터만 가능하다. (자바는 ..)
+		};
+};
+
+function call2(){
+	here.innerHTML += "<br>"+ (arguments[0]+arguments[1]);
+}
+
+function call2(...nums){
+	here.innerHTML += "<br>전개연산자 이용: "+ (nums[0]+nums[1]);
+}
+
+
+function call(a,b,c){
+	if(!a) a=1;
+	if(!b) b=2;
+	if(!c) c=3;
+	here.innerHTML += "<br>"+(a+b+c);
+}
+
+function call(a,b,c){ //뒤에 정의한 이 call함수가 사용된다.
+	a= a|| 200;
+	b= b|| 300;
+	c= c|| 400;
+	
+	here.innerHTML += "<br>"+(a+b+c);
+}
+
+//ECMAScript6에서 추가 기능... 매개변수 default값 주기
+//=> 내부브라우저 지원하지 않는다.
+function call(a=1,b=2,c=3){
+	here.innerHTML += "<br>"+(a+b+c);
+}
+
+</script>
+</head>
+<body>
+<button id="btn1">uriEncoding</button>
+<button id="btn2">eval(문자열실행)</button>
+<button id="btn3">isNaN</button>
+<button>parseInt</button>
+<button id="btn5">기본매개변수</button>
+<button id="btn6">forEach</button>
+<button id="btn7">전개연산자</button>
+<hr>
+<div id="here">~여기에 결과를 표시합니다~</div>
+</body>
+</html>
