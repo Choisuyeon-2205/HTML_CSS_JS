@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+ #here { width: 300px; height: 300px; border: 1px solid black; }
+ P { border: 1px solid gray; }
+</style>
+<script>
+function call1(){
+	var t= document.createTextNode("text노드생성");
+	var e= document.createElement("p"); //<p></p>
+	e.appendChild(t); //<p>text노드생성</p>
+	var h= document.getElementById("here");
+	h.appendChild(e);
+	
+	here.innerHTML += "<br><p>innerHTML로 P생성</p>"
+	
+	var e= document.createElement("img"); //<img/>
+	e.src= "../16/images/doit.jpg";
+	e.width= "100";
+	e.height= "100";
+	h.appendChild(e);
+	
+	h.innerHTML+= "<img id='my' class='my' src='../16/images/doit.jpg' width='200' height='200'>"
+	
+};
+
+function call2(){ //class로 여러개
+	var imgs= document.querySelectorAll(".my");
+	imgs.forEach(function(elt, i, array) {
+		elt.setAttribute("src", "../day08/15/images/flower.jpg");
+	});
+}
+
+function call3(){ //id로
+	var img= document.querySelector("#my");
+	img.src="../day05/11/images/bear.jpg";
+}
+
+function call4(){
+	var buttons = document.querySelector("button");
+	buttons.forEach(function(elt, i, array) {
+		here.innerHTML+= "<p>"+elt.innerHTML+"</p>";		
+	});
+}
+
+function call5(){
+	var h= document.querySelector("#here");
+	h.style.color= "red";
+	h.style.backgroundColor="yellow";
+}
+
+function call6(){
+	var h= document.querySelector("#here");
+	var imgs= document.querySelectorAll(".my");
+	//h.parentNode.removeChild(h);
+	
+	imgs.forEach(function(elt, i, array) {
+		h.removeChild(elt);
+	});
+}
+</script>
+</head>
+<body>
+<h1>DOM(Document Object Model)</h1>
+<button onclick="call1();">동적객체생성</button>
+<button onclick="call2();">동적속성변경</button>
+<button onclick="call3();">동적속성변경2</button>
+<button onclick="call4();">querySelectorAll</button>
+<button onclick="call5();">style변경</button>
+<button onclick="call6();">동적제거</button>
+<button onclick="call7();">동적제거2</button>
+<hr><br>
+<div id="here">
+
+</div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+window.onload= function(ev){
+	console.log(ev);
+	console.log("이벤트의 타입: "+ev.type);
+	
+	btn1.onclick= function(ev){
+		//ev는 btn1에 대한 이벤트객체 정보
+		here.innerHTML="btn1 이벤트 발생";
+		console.log(ev);
+		console.log("이벤트의 타입: "+ev.type);
+		here.innerHTML+="<br>x= "+ev.clientX
+		here.innerHTML+="<br>y= "+ev.clientY
+	}; 
+	
+	btn1.onclick= function(ev){
+		//ev는 btn1에 대한 이벤트객체 정보
+		here.innerHTML="btn1 이벤트 발생";
+		console.log(ev);
+		console.log("이벤트의 타입: "+ev.type);
+		here.innerHTML+="<br>x= "+ev.clientX
+		here.innerHTML+="<br>y= "+ev.clientY
+	}; 
+	
+	btn2.onclick= function(e){
+		btn1.onclick(e);
+	}; 
+	
+	btn3.onclick= function(){
+		alert("버튼3의 코드입니다.")
+	}; 
+	
+	mytext.onkeydown= function(event){
+		console.log(event);
+		if(event.key=="Enter"){
+			btn3.onclick();
+		}
+	};
+	/*
+	mytext.onkeyup= function(){
+		console.log("onkeyup");
+	};
+	mytext.onkeypress= function(){
+		console.log("onkeypress");
+	};
+	*/
+	
+	btn4.onclick= function(){
+		btn1.onclick= null;
+	}; 
+	
+	function validate(obj){
+		var val= obj.value;
+		if(val==""){
+			alert("필수입력입니다.");
+			obj.focus();
+			return false;
+		}
+		return true;
+	};
+	
+	//default event: 이미 이벤트 핸들러가 제공된다.
+	//원래 제공되는 이벤트 핸들러를 막고자한다.(사용하기싫음): return false;
+	myfrm.onsubmit= function(){
+		var uobj= document.querySelector("input[name='userid']");
+		if(!validate(uobj)) return false;
+		
+		var uobj= document.querySelector("input[name='userpw']");
+		if(!validate(uobj)) return false;
+		//alert('서버로안감');
+		//return false;
+	}; 
+	
+	
+	var p= document.querySelector("div p");
+	/*
+	//고전적 이벤트 모델
+	p.onclick= function(ev){
+		alert("p태그입니다.");
+		//이벤트 전달 막기(버블링x)
+		if(ev.stopPropagation){
+			ev.stopPropagation();
+		}else{
+			ev.cancelBubble=false;
+		}
+	};
+	*/
+	
+	//버블링 하게된다.(표준이벤트모델 방법)
+	p.addEventListener("click",function(ev){
+		alert("p태그입니다.");
+	},false);
+	
+	//표준이벤트 모델
+	btn5.addEventListener("click", function(e){
+		alert("표준이벤트 모델 사용하기");
+	},false);
+	
+	btn6.addEventListener("click", func);
+	
+	function func(){
+		try{
+		var arr= new Array(99999999999999999999);
+		alert(arr.length);
+		}catch(ex){
+			here.innerHTML=ex;
+		}
+	}
+};
+</script>
+</head>
+<body>
+<h1>이벤트(Event)</h1>
+<button id="btn1">이벤트객체</button>
+<button id="btn2">이벤트강제발생</button>
+<input type="text" id="mytext">
+<button id="btn3">이벤트강제발생2</button>
+<button id="btn4">이벤트제거</button>
+<button id="btn5">표준이벤트모델</button>
+<button id="btn6">예외처리</button>
+<br>
+<!-- 디폴트 이벤트 -->
+<form id="myfrm" action="loginChk.jsp" method="get">
+아이디:<input type="text" name="userid" value="admin"><br>
+비밀번호:<input type="password" name="userpw" value="1234"><br>
+<input type="submit" value="로그인하기">
+</form>
+<br><hr><br>
+<div id="here" onclick="alert('div태그');" style="border:1px solid gray;">
+	<div onclick="alert('div2태그');" style="border:1px solid gray;">
+		<p onclick="alert('p태그');" style="border:1px solid gray;">여기</p>
+	</div>
+</div>
+</body>
+</html>

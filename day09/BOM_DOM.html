@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+function call(){
+	var arr= [10,7,20,2,6,8,30,5];
+	here.innerHTML= "Array객체";
+	var f= function(elt,idx){
+		here.innerHTML+= "<br>"+idx+"번째: "+elt;
+	};
+	arr.forEach(f);
+	
+}
+
+function call2(){
+	var arr= [10,7,20,2,6,8,30,5];
+	var f= function(aa){
+		return aa%2;
+	};
+	var arr2= arr.map(f);
+	here.innerHTML= arr2;
+}
+
+function call3(){
+	var arr= [10,7,20,2,6,8,30,5];
+	var f= function(aa){
+		return aa%2==1;
+	};
+	var arr2= arr.filter(f);
+	here.innerHTML= arr2;
+}
+
+function call4(){
+	var arr= [10,7,20,2,6,8,30,5];
+	var f= function(aa,bb){
+		return aa-bb;
+	};
+	var arr2= arr.sort(f);
+	here.innerHTML= arr2;
+}
+
+function call5(){
+	var d= new Date();
+	here.innerHTML= d.getMonth()+1;
+}
+
+function call6(){
+	here.innerHTML= Math.floor(Math.random()*11); //0~10
+}
+
+function bomTest1(){
+	here.innerHTML="";
+	for(var prop in window){
+		here.innerHTML+= "<br>"+prop+"==>" +window[prop];
+		}
+}
+
+function bomTest2(){
+	here.innerHTML="";
+	for(var prop in document){
+		here.innerHTML+= "<br>"+prop+"==>" +document[prop];
+		}
+}
+
+function bomTest3(){
+	here.innerHTML="";
+	for(var prop in screen){
+		here.innerHTML+= "<br>"+prop+"==>" +screen[prop];
+		}
+}
+
+function bomTest4(){
+	here.innerHTML="";
+	for(var prop in location){
+		here.innerHTML+= "<br>"+prop+"==>" +location[prop];
+		}
+}
+
+function bomTest5(){
+	here.innerHTML="";
+	for(var prop in navigator){
+		here.innerHTML+= "<br>"+prop+"==>" +navigator[prop];
+		}
+}
+
+function bomTest6(){
+	here.innerHTML="";
+	for(var prop in history){
+		here.innerHTML+= "<br>"+prop+"==>" +history[prop];
+		}
+}
+
+
+</script>
+</head>
+<body>
+<button onclick="call();">Array객체(forEach)</button>
+<button onclick="call2();">Array객체(Map)</button>
+<button onclick="call3();">Array객체(filter)</button>
+<button onclick="call4();">Array객체(sort)</button>
+<button onclick="call5();">Date객체</button>
+<button onclick="call6();">Math객체</button>
+<button onclick="bomTest1();">window객체</button>
+<button onclick="bomTest2();">document객체</button>
+<button onclick="bomTest3();">screen객체</button>
+<button onclick="bomTest4();">location객체</button>
+<button onclick="bomTest5();">navigator객체</button>
+<button onclick="bomTest6();">history객체</button>
+<div id="here">여기</div>
+</body>
+</html>
