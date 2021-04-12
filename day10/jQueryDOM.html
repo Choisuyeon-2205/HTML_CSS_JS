@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.style1{ border: 1px solid gray; 
+	padding:10px;
+	margin: 10px;
+	background-color: pink;
+}
+.style2{ border: 5px dotted blue; 
+	padding:10px;
+	margin: 10px;
+	background-color: skyblue;
+}
+
+</style>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script>
+$(function(){
+	$("#btn1").click(function(){
+		$("h3:even").css("background-color","lightgreen");
+	});
+	$("#btn2").click(function(){
+		$("h3").filter(":odd").css("background-color","skyblue");
+	});
+	$("#btn3").click(function(){
+		//$("h3:nth-child(3n)").css("color","red");
+		//$("h3").filter(":nth-child(3n)").css("color","red");
+		$("h3").filter(function(idx, item){
+			//선택하고자 한다면 true, 그렇지 않으면 false를 return
+			return idx==1||idx==4?true:false;
+		}).css("color","red");
+	});
+	$("#btn4").click(function(){
+		$("h3").css("border","1px solid gray")
+			.filter(":odd").css("background-color","skyblue") //홀수번째 색상지정
+			.end()
+			.filter(":even").css("color","purple") //짝수번째 색상 지정
+	});
+	$("#btn5").click(function(){
+		$("h3").eq(0).css("background-color","orange"); //맨앞
+		$("h3").first().css("color","red"); //맨앞
+		$("h3").eq(-1).css("background-color","yellow"); //맨뒤		
+		$("h3").last().css("color","green"); //맨뒤		
+		
+		$("h3").eq(3).css("background-color","pink"); //세번째꺼
+		$("h3").eq(-2).css("color","blue"); //세번째꺼
+	});
+	$("#btn6").click(function(){
+		$("h3").css("background-color","yellow")
+		.add("button")
+		.css("color","blue");
+	});
+	$("#btn7").click(function(){
+		//JSON
+		var s= '{"name":"수연","age":24}';
+		var obj= JSON.parse(s);
+		$("#here").html( obj.name );
+		
+		//XML
+		var s='<customers>'+ 
+			'<customer><name>수연</name><age>24</age></customer>'+
+			'<customer><name>수정</name><age>26</age></customer>'+
+			'<customer><name>채연</name><age>25</age></customer>'+
+			'</customers>';
+		var obj= $.parseXML(s);
+		$(obj).find("customer").each(function(idx, item){
+			alert($(item).find("name").text());
+		});
+	});
+	$("#btn8").click(function(){
+		$(this).parent().css("background-color","yellow");
+		var s= $(this).text();
+		if(s=="활성화하기(parent)"){
+			$(this).text("비활성화하기"); //버튼 이름 바꾸기
+			$(this).parent().find("span").text("활성화하기");
+		}else{
+			$(this).text("활성화하기(parent)"); //버튼 이름 바꾸기
+			$(this).parent().find("span").text("비활성화하기");
+		}
+		
+	});
+	$("#btn9").click(function(){
+		$("#here").addClass("style1");
+		$("#here").addClass("style2");
+	});
+	$("#btn10").click(function(){
+		$("#here").removeClass("style2");
+	});
+	
+});
+</script>
+</head>
+<body>
+<h1>jQuery DOM활용</h1>
+<button id="btn1">filter1</button>
+<button id="btn2">filter2</button>
+<button id="btn3">filter3</button>
+<button id="btn4">end</button>
+<button id="btn5">특정위치</button>
+<button id="btn6">add</button>
+<button id="btn7">XML파싱</button>
+<button id="btn9">class추가</button>
+<button id="btn10">class제거</button>
+
+<hr>
+<h3>HTML0</h3>
+<h3>HTML1</h3>
+<h3>HTML2</h3>
+<h3>HTML3</h3>
+<h3>HTML4</h3>
+<div id="here">
+	<span>비활성화하기</span>
+	<button id="btn8">활성화하기(parent)</button>	
+</div>
+</body>
+</html>
