@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(function(){
+	$("#btn1").click(function(){
+		$("#here").html("<h1>이벤트이름을 이용하는 방법</h1>");
+	});
+	$("#btn2").on("click",function(){
+		$("#here").html("<h1>이벤트와 리스너를 연결</h1>");
+	});
+	$("#btn3").on("mouseenter",function(){
+		$("#here").html("<h1>이벤트와 리스너를 연결...mouseenter</h1>");
+		$(this).css("background-color","orange");
+	});
+	$("#btn3").on("mouseleave",function(){
+		$("#here").html("<h1>이벤트와 리스너를 연결...mouseleave</h1>");
+		$(this).css("background-color","lightgreen");
+	});
+	$("#btn4").on("click",function(){
+		var obj= {};
+		obj.mouseenter = function(){
+			$("#here").html("<h1>이벤트와 리스너를 연결...mouseenter</h1>");
+			$(this).css("background-color","orange");
+		};
+		obj.mouseleave = function(){
+			$("#here").html("<h1>이벤트와 리스너를 연결...mouseleave</h1>");
+			$(this).css("background-color","lightgreen");
+		}
+		$("#here").on(obj); //버튼 누르면 이벤트obj를  연결
+	});
+	$("#btn5").click(function(){
+		//hover
+		var f1= function(){
+			$("#here").html("<h1>이벤트와 리스너를 연결...mouseenter</h1>");
+			$(this).css("background-color","orange");
+		};
+		var f2 = function(){
+			$("#here").html("<h1>이벤트와 리스너를 연결...mouseleave</h1>");
+			$(this).css("background-color","lightgreen");
+		}
+		$("#here").hover(f1,f2); 
+	});
+	$("#btn6").click(function(){
+		$("#here").off();
+	});
+	$("#btn7").click(function(aa){
+		$("#here").one("click", function(bb){
+			alert("한번만 실행합니다.");
+			$(this).css("color","blue");
+		});
+	});
+});
+</script>
+<script>
+function call(a,b,c){
+	$("#here").html(a+b+c);
+}
+
+$(function(){
+	call(1,2,3);
+	$("#btn8").on("click", function(event){
+		var s="x= "+event.pageX;
+		s+="<br>y= "+event.pageY;
+		$("#here").html(s);
+	});
+	
+	$("#btn9").on("click", function(){
+		$("#btn7").trigger("click");
+	});
+})
+</script>
+
+<style>
+  #here{ border: 1px solid red; }
+</style>
+</head>
+<body>
+<h1>jQuery Event 사용하기</h1>
+<button id="btn1">이벤트사용1</button>
+<button id="btn2">이벤트사용2</button>
+<button id="btn3">이벤트사용3</button>
+<button id="btn4">이벤트사용4</button>
+<button id="btn5">이벤트사용5</button>
+<button id="btn6">이벤트제거(off)</button>
+<button id="btn7">이벤트1회(one)</button>
+<button id="btn8">이벤트8</button>
+<button id="btn9">이벤트호출(trigger)</button>
+<hr>
+<div id="here">여기</div>
+<canvas id="myCanvas" width="200" height="100" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML canvas tag.</canvas>
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.moveTo(0,0);
+ctx.lineTo(200,100);
+ctx.stroke();
+</script>
+</body>
+</html>

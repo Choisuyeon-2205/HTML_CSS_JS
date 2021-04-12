@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+body, div, form{ 
+border: 1px solid gray;
+padding: 10px;
+ }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(function(){
+	$("#myfrm").on("submit", function(ev){
+		var uobj= $("input[name='userid']");
+		if(!validate(uobj)) ev.preventDefault(); //이벤트 제거
+		
+		var uobj=  $("input[name='userpw']");
+		if(!validate(uobj)) ev.preventDefault();
+		//return true;
+	}); 
+	 //부모까지 가는거 막음 : stopPropagation
+	var f= function(ev){ alert(this); ev.stopPropagation(); };
+	//$("#container").on("click", f);
+	//$("#myfrm").on("click", f);
+	//$("body").on("click", f);
+	
+	$("input[name='userid']").on("keypress", f2);
+	$("input[name='userpw']").on("keypress", f2);
+	var f2= function(){ $("#here").html($(this).val()) };
+});
+
+function validate(obj){
+	var val= $(obj).val();
+	if(val==""){
+		alert("필수입력입니다.");
+		$(obj).focus();
+		return false;
+	}
+	return true;
+}
+</script>
+<script>
+$(function(){
+	$("#all-check").on("change", function(){
+		if(this.checked){
+			$("#check-item").children().prop("checked", function(idx){
+				return idx<3?true:false;
+			});
+		}else{
+			$("#check-item").children().prop("checked", false);
+		}
+	})
+});
+</script>
+</head>
+<body>
+<div id="container">
+	<form  id="myfrm" action="../day09/loginChk.jsp" method="get" >
+	아이디:<input type="number" name="userid" value="100"><br>
+	비밀번호:<input type="text" name="userpw" value="1234"><br>
+	<input type="submit" value="로그인하기">
+</div>
+<div id="here">여기</div>
+<div id="changeTest">
+<input type="checkbox" id="all-check">All
+<div id="check-item">
+	<input type="checkbox">HTML5
+	<input type="checkbox">CSS3
+	<input type="checkbox">JavaScript
+	<input type="checkbox">JQuery
+</div>
+</div>
+</body>
+</html>

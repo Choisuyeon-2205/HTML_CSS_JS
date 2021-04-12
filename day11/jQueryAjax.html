@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+//페이지 이동 없이 서버에 자원을 요청
+$(function(){
+	$("#btn1").on("click", function(){
+		var xhr= new XMLHttpRequest();
+		xhr.open("get","전국도서관표준데이터.json",true);
+		xhr.onreadystatechange= function(){
+			//동기화
+			if(xhr.readyState==4 && xhr.status==200){
+				here.innerHTML= xhr.responseText;
+			}
+		}
+		xhr.send();
+	});
+	
+	$("#btn2").on("click", function(){
+		$("#here").load("result.jsp");
+	});
+	$("#btn3").on("click", function(){
+		//json은 원하는 데이터만 가져오도록 할 수 있어야함
+		$.ajax({
+			url:"전국도서관표준데이터.json",
+			type: "get",
+			success: function(responseData){
+				console.log(responseData);
+				var arr= responseData["records"];
+				var s="";
+				for(var i=0; i<arr.length; i++){
+					s+= arr[i]["도서관명"]+"<br>";
+				}
+				$("#here").html(s)
+			},
+			error: function(){}
+		});
+	});
+	$("#btn4").on("click", function(){
+		//json은 원하는 데이터만 가져오도록 할 수 있어야함
+		$.getJSON("전국도서관표준데이터.json", function(responseData) {
+			var arr= responseData["records"];
+			var s="";
+			for(var i=0; i<arr.length; i++){
+				s+= arr[i]["도서관명"]+"<br>";
+			}
+			$("#here").html(s)
+		});
+	});
+	$("#btn5").on("click", function(){
+		//json은 원하는 데이터만 가져오도록 할 수 있어야함
+		$.ajax({
+			url:"loginChk.jsp",
+			type: "get",
+			data: {"userid": $("#userid").val(), "email":$("#usermail").val()},
+			success: function(responseData){
+				$("#here").html(responseData)
+			},
+			error: function(){}
+		});
+	});
+	$("#btn6").on("click", function(){
+		//json은 원하는 데이터만 가져오도록 할 수 있어야함
+		$.ajax({
+			url:"loginChk2.jsp",
+			type: "get",
+			data: {"userid": $("#userid").val(), "email":$("#usermail").val()},
+			success: function(responseData){
+				var obj= JSON.parse(responseData);
+				var s="";
+				for(var key in obj){
+					s+= "<p>"+key+"=>"+obj[key]+"</p>";
+				}
+				$("#here").html(s);
+			},
+			error: function(){}
+		});
+	});
+	$("#btn7").on("click", function(){
+		//json은 원하는 데이터만 가져오도록 할 수 있어야함
+		$.ajax({
+			url:"loginChk2.jsp?userid="+$("#userid").val()+"&email="+$("#usermail").val(),
+			type: "get",
+			success: function(responseData){
+				var obj= JSON.parse(responseData);
+				var s="";
+				for(var key in obj){
+					s+= "<p>"+key+"=>"+obj[key]+"</p>";
+				}
+				$("#here").html(s);
+			},
+			error: function(){}
+		});
+	});
+	$("#btn7").on("click", function(){
+		var param="?userid="+$("#userid").val()+"&email="+$("#usermail").val();
+		$.ajax({
+			url:"loginChk2.jsp"+param,
+			type: "get",
+			success: function(responseData){
+				var obj= JSON.parse(responseData);
+				var s="";
+				for(var key in obj){
+					s+= "<p>"+key+"=>"+obj[key]+"</p>";
+				}
+				$("#here").html(s);
+			},
+			error: function(){}
+		});
+	});
+	$("#btn8").on("click", function(){
+		//input안에 있는 것을 파라미터로 만들어 보내준다.
+		var param=$("#myfrm").serialize();
+		alert(param);
+		$.ajax({
+			url:"loginChk2.jsp?"+param,
+			type: "get",
+			success: function(responseData){
+				var obj= JSON.parse(responseData);
+				var s="";
+				for(var key in obj){
+					s+= "<p>"+key+"=>"+obj[key]+"</p>";
+				}
+				$("#here").html(s);
+			},
+			error: function(){}
+		});
+	});
+});
+</script>
+</head>
+<body>
+<h1>Ajax(Asynchronous JavaScript and XML)</h1>
+<button id="btn1">javascript-Ajax</button>
+<button id="btn2">Ajax(load)</button>
+<button id="btn3">Ajax(ajax)</button>
+<button id="btn4">Ajax(getJSON)</button><br>
+<hr>
+<form id="myfrm">
+아이디: <input type="number" value= "100" name="userid" id="userid"><br>
+이메일: <input type="text" value= "suyeon2205@naver.com" name="email" id="usermail">
+</form>
+<button id="btn5">Ajax(ajax..jsp호출1)</button>
+<button id="btn6">Ajax(ajax..jsp호출2)</button>
+<button id="btn7">Ajax(ajax..jsp호출3)</button>
+<button id="btn8">Ajax(ajax..jsp호출4)</button>
+<hr>
+<div id="here">여기</div>
+</body>
+</html>

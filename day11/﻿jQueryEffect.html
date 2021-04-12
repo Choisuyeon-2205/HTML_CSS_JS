@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(function(){
+	$("button:first-of-type").on("click", function(){
+		$("p").show(1000);
+	});
+	$("button").eq(1).on("click", function(){
+		$("p").hide(2000);
+	});
+	$("button").eq(2).on("click", function(){
+		$("p").toggle(2000);
+	});
+	
+	$("button").eq(3).on("click", function(){
+		$("p").slideToggle(2000);
+	});
+	$("button").eq(4).on("click", function(){
+		$("p").fadeToggle(2000);
+	});
+	$("button").eq(5).on("click", function(){
+		$("p").fadeTo(2000,0.5, function(){
+			$("#here").html("end");
+		}); //흐릿하게
+	});
+	$("button").eq(6).on("click", function(){
+		var obj= {
+				left:'250px',
+				opacity: '0.5',
+				height: '+=150px',
+				width: '+=150px'
+		}
+		
+		$("p").animate(obj, 2000, function() {
+			$("#here").html("END");
+		}); //흐릿하게
+	});
+});
+</script>
+<style>
+p { background:#98bf21; height:100px; width:100px; position:absolute; }
+</style>
+</head>
+<body>
+<button>show</button>
+<button>hide</button>
+<button>toggle</button>
+<button>slidetoggle</button>
+<button>fadeToggle</button>
+<button>fadeTo</button>
+<button>animate</button>
+</body>
+<p>this is a paragraph with little contents.</p>
+<p>this is another small paragraph</p>
+<div id="here">여기</div>
+</html>
